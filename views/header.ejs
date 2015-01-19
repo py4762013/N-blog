@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Blog</title>
+        <link rel="stylesheet" href="/stylesheets/style.css">
+        <script charset="utf-8" src="/kindeditor/kindeditor-min.js"></script>
+        <script charset="utf-8" src="/kindeditor/lang/zh_CN.js"></script>
+        <script>
+        KindEditor.ready(function(K){
+            editor = K.create('textarea', {
+            allowImageUpload : false,
+            items: [
+                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic',
+                'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'insertorderedlist', 'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+            });
+        });
+        </script>
+    </head>
+
+    <header>
+        <h1><%= title %></h1>
+    </header>
+
+    <nav>
+        <span><a title="HomePage" href="/">Home</a></span>
+        <span><a title="Archive" href="/archive">Archive</a></span>
+        <span><a title="Tags" href="/tags">tags</a></span>
+        <span><a title="Links" href="/links">Links</a></span>
+        <% if(user){ %>
+            <span><a tiitle="Upload" href="/upload">Upload</a></span>
+            <span><a title="Publication" href="/post">Publication</a></span>
+            <span><a title="Logout" href="/logout">Logout</a></span>
+        <% } else { %>
+            <span><a title="Login" href="/login">login</a></span>
+            <span><a title="Register" href="/reg">Register</a></span>
+        <% }%>
+        <span><form action="/search" method="GET"><input type="text" name="keyword" placeholder="SEARCH" class="search" /></form></span>
+    </nav>
+
+    <article>
+        <% if(success) { %>
+            <div><%= success  %></div>
+        <% } %>
+        <% if(error) { %>
+            <div><%= error %></div>
+        <% } %>
