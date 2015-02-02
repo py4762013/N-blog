@@ -1,6 +1,7 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/blog');
+//mongoose.connect('mongodb://localhost/blog');
+mongoose.connect('mongodb://ublog:pblog@localhost:27017/blog');
 
 var userSchema = new mongoose.Schema({
     name: String,
@@ -42,11 +43,11 @@ User.prototype.save = function(callback){
 };
 
 User.get = function(name, callback){
-    userModel.findOne({name: name}, function(err, user){
-        if(err){
-            return callback(err);
-        }
-        callback(null, user);
+    userModel.findOne({ name: name },function(err, user){
+            if(err){
+                return callback(err);
+            }
+         callback(null, user);
     });
 };
 

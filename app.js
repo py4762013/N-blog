@@ -20,7 +20,7 @@ var app = express();
 
 var passport = require('passport'),GithubStrategy = require('passport-github').Strategy;
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 80);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -35,12 +35,17 @@ app.use(multer({
 
 app.use(session({
     secret: settings.cookieSecret,
+    resave: false,
+    saveUninitialized: true,
     key: settings.db,//cookie name
     cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
     store: new MongoStore({
+        /*username: settings.username,
+        password: settings.password,
         db: settings.db,
         host: settings.host,
-        port: settings.port
+        port: settings.port*/
+        url: 'mongodb://ublog:pblog@localhost:27017/blog'
     })
 }));
 
